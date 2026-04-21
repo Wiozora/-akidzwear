@@ -53,10 +53,10 @@ export const Footer = () => {
                         <div>
                             <Link href="/" className="inline-flex items-center" aria-label="AkidZ Wear home">
                                 <Image
-                                    src="/logo-compact.png"
+                                    src="/logo.png"
                                     alt="AkidZ Wear"
-                                    width={540}
-                                    height={364}
+                                    width={1816}
+                                    height={1192}
                                     className="h-40 w-auto object-contain"
                                 />
                             </Link>

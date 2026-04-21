@@ -66,10 +66,10 @@ export const Navbar = () => {
                     <div className="flex items-center justify-between gap-4">
                         <Link href="/" className="relative flex h-20 w-40 shrink-0 items-center overflow-visible sm:w-48 md:h-24 md:w-56" aria-label="AkidZ Wear home">
                             <Image
-                                src="/logo-compact.png"
+                                src="/logo.png"
                                 alt="AkidZ Wear"
-                                width={540}
-                                height={364}
+                                width={1816}
+                                height={1192}
                                 priority
                                 className="absolute left-0 top-1/2 h-28 w-auto -translate-y-1/2 object-contain md:h-32"
                             />

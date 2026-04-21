@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     siteName: 'AkidZ Wear',
     images: [
       {
-        url: '/logo-compact.png',
-        width: 540,
-        height: 364,
+        url: '/logo.png',
+        width: 1816,
+        height: 1192,
         alt: 'AkidZ Wear logo',
       },
     ],
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AkidZ Wear | Playful Premium Clothing For Little Originals',
     description: 'Soft, colorful clothing for toddlers and kids with parent-friendly comfort.',
-    images: ['/logo-compact.png'],
+    images: ['/logo.png'],
   },
 };
 
