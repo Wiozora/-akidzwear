@@ -10,7 +10,7 @@ import { useWishlist } from '@/context/WishlistContext';
 import { ProductCard } from '@/components/product';
 import { Button } from '@/components/ui';
 import { Breadcrumbs } from '@/components/ui';
-import { ShoppingCart, Heart, Star, Minus, Plus, Truck, RotateCcw, Shield } from 'lucide-react';
+import { ShoppingCart, Heart, Star, Minus, Plus, Truck, RotateCcw, Shield, Ruler, MessageCircle, CheckCircle2 } from 'lucide-react';
 
 export default function ProductDetailPage() {
     const params = useParams();
@@ -21,6 +21,7 @@ export default function ProductDetailPage() {
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [sizeError, setSizeError] = useState(false);
 
     if (!product) {
         return (
@@ -45,7 +46,15 @@ export default function ProductDetailPage() {
         : null;
 
     const handleAddToCart = () => {
-        addToCart({ ...product, ...(selectedSize ? {} : {}) });
+        if (product.sizes?.length && !selectedSize) {
+            setSizeError(true);
+            return;
+        }
+
+        addToCart(product, {
+            quantity,
+            selectedSize: selectedSize ?? undefined,
+        });
     };
 
     return (
@@ -142,6 +151,23 @@ export default function ProductDetailPage() {
                                 {product.description}
                             </p>
 
+                            <div className="mb-8 grid gap-3 sm:grid-cols-2">
+                                <div className="rounded-2xl border border-[var(--color-brand-line)] bg-white/80 p-4">
+                                    <div className="flex items-center gap-2 text-sm font-black text-gray-900">
+                                        <CheckCircle2 size={18} className="text-[var(--color-brand-mint)]" />
+                                        Soft everyday fabric
+                                    </div>
+                                    <p className="mt-2 text-sm leading-6 text-gray-500">Gentle feel for active kids, school days, outings, and repeat wear.</p>
+                                </div>
+                                <div className="rounded-2xl border border-[var(--color-brand-line)] bg-white/80 p-4">
+                                    <div className="flex items-center gap-2 text-sm font-black text-gray-900">
+                                        <MessageCircle size={18} className="text-green-600" />
+                                        WhatsApp order support
+                                    </div>
+                                    <p className="mt-2 text-sm leading-6 text-gray-500">Need size help? Message us before checkout and we will guide you.</p>
+                                </div>
+                            </div>
+
                             {/* Size Selector */}
                             {product.sizes && product.sizes.length > 0 && (
                                 <div className="mb-8">
@@ -153,7 +179,10 @@ export default function ProductDetailPage() {
                                         {product.sizes.map((size) => (
                                             <button
                                                 key={size}
-                                                onClick={() => setSelectedSize(size)}
+                                                onClick={() => {
+                                                    setSelectedSize(size);
+                                                    setSizeError(false);
+                                                }}
                                                 className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${selectedSize === size
                                                         ? 'border-gray-900 bg-gray-900 text-white shadow-md'
                                                         : 'border-gray-200 text-gray-700 hover:border-gray-400'
@@ -163,6 +192,9 @@ export default function ProductDetailPage() {
                                             </button>
                                         ))}
                                     </div>
+                                    {sizeError && (
+                                        <p className="mt-3 text-sm font-semibold text-red-500">Please select a size before adding this item.</p>
+                                    )}
                                 </div>
                             )}
 
@@ -221,7 +253,19 @@ export default function ProductDetailPage() {
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2">
                                     <Shield size={20} className="text-[var(--color-brand-peach)]" />
-                                    <span className="text-xs font-semibold text-gray-600">Secure Payment</span>
+                                    <span className="text-xs font-semibold text-gray-600">COD Available</span>
+                                </div>
+                            </div>
+
+                            <div className="mt-8 rounded-[28px] bg-[var(--color-brand-cream)] p-5">
+                                <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-gray-900">
+                                    <Ruler size={18} />
+                                    Fit, Care & Delivery
+                                </h2>
+                                <div className="mt-4 grid gap-3 text-sm leading-6 text-gray-600">
+                                    <p><strong className="text-gray-900">Fit:</strong> True to age for most kids. Choose one size up if your child is between sizes.</p>
+                                    <p><strong className="text-gray-900">Care:</strong> Wash gently in cold water and dry inside out to keep colors fresh.</p>
+                                    <p><strong className="text-gray-900">Delivery:</strong> Orders are packed for doorstep delivery, with WhatsApp confirmation before dispatch.</p>
                                 </div>
                             </div>
                         </div>

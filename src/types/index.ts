@@ -22,6 +22,7 @@ export interface Product {
 }
 
 export interface CartItem extends Product {
+    cartKey?: string;
     quantity: number;
     selectedSize?: string;
 }

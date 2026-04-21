@@ -7,6 +7,7 @@ export const Footer = () => {
         { href: '/collections', label: 'Toddler Edit' },
         { href: '/collections', label: 'Kids Edit' },
         { href: '/shop', label: 'New Arrivals' },
+        { href: '/wishlist', label: 'Wishlist' },
     ];
 
     const supportLinks = [
@@ -40,10 +41,10 @@ export const Footer = () => {
                                 <p>support@akidzwear.com</p>
                                 <p>+92 300 0000000</p>
                             </div>
-                            <div className="mt-6 flex gap-3">
-                                <a href="#" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]" aria-label="Instagram">IG</a>
-                                <a href="#" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]" aria-label="Facebook">FB</a>
-                                <a href="#" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]" aria-label="WhatsApp">WA</a>
+                            <div className="mt-6 flex flex-wrap gap-3">
+                                <a href="mailto:support@akidzwear.com" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]" aria-label="Email AkidZ Wear">Email</a>
+                                <a href="https://wa.me/923000000000?text=Hi!%20I%20have%20a%20question%20about%20AkidZ%20Wear." target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]" aria-label="WhatsApp AkidZ Wear">WA</a>
+                                <Link href="/contact" className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-[var(--color-brand-ink)]">Contact</Link>
                             </div>
                         </div>
                     </div>
@@ -52,10 +53,10 @@ export const Footer = () => {
                         <div>
                             <Link href="/" className="inline-flex items-center" aria-label="AkidZ Wear home">
                                 <Image
-                                    src="/logo.png"
+                                    src="/logo-compact.png"
                                     alt="AkidZ Wear"
-                                    width={1816}
-                                    height={1192}
+                                    width={540}
+                                    height={364}
                                     className="h-40 w-auto object-contain"
                                 />
                             </Link>
@@ -94,8 +95,8 @@ export const Footer = () => {
                     <div className="flex flex-col gap-4 border-t border-[var(--color-brand-line)] pt-6 text-sm text-[var(--color-brand-muted)] md:flex-row md:items-center md:justify-between">
                         <p>&copy; {new Date().getFullYear()} AkidZ Wear. All rights reserved.</p>
                         <div className="flex gap-5">
-                            <Link href="#" className="transition-colors hover:text-[var(--color-brand-ink)]">Privacy Policy</Link>
-                            <Link href="#" className="transition-colors hover:text-[var(--color-brand-ink)]">Terms of Service</Link>
+                            <Link href="/privacy" className="transition-colors hover:text-[var(--color-brand-ink)]">Privacy Policy</Link>
+                            <Link href="/terms" className="transition-colors hover:text-[var(--color-brand-ink)]">Terms of Service</Link>
                         </div>
                     </div>
                 </div>

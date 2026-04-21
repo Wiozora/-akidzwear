@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { products } from '@/lib/data';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { ShoppingBag, Menu, X, Heart, Search, ArrowRight } from 'lucide-react';
@@ -20,6 +21,26 @@ export const Navbar = () => {
     const { wishlistCount } = useWishlist();
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const searchResults = useMemo(() => {
+        const query = searchQuery.trim().toLowerCase();
+        if (!query) return [];
+
+        return products
+            .filter((product) =>
+                product.name.toLowerCase().includes(query) ||
+                product.description.toLowerCase().includes(query) ||
+                product.category.toLowerCase().includes(query)
+            )
+            .slice(0, 5);
+    }, [searchQuery]);
+
+    const closeSearch = () => {
+        setSearchOpen(false);
+        setSearchQuery('');
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,10 +66,10 @@ export const Navbar = () => {
                     <div className="flex items-center justify-between gap-4">
                         <Link href="/" className="relative flex h-20 w-40 shrink-0 items-center overflow-visible sm:w-48 md:h-24 md:w-56" aria-label="AkidZ Wear home">
                             <Image
-                                src="/logo.png"
+                                src="/logo-compact.png"
                                 alt="AkidZ Wear"
-                                width={1816}
-                                height={1192}
+                                width={540}
+                                height={364}
                                 priority
                                 className="absolute left-0 top-1/2 h-28 w-auto -translate-y-1/2 object-contain md:h-32"
                             />
@@ -67,16 +88,17 @@ export const Navbar = () => {
                         </nav>
 
                         <div className="flex items-center gap-2">
-                            <Link
-                                href="/shop"
+                            <button
+                                type="button"
+                                onClick={() => setSearchOpen((open) => !open)}
                                 className="hidden rounded-full border border-[var(--color-brand-line)] bg-white/75 p-2.5 text-[var(--color-brand-ink)] transition-colors hover:bg-white md:inline-flex"
                                 aria-label="Search products"
                             >
                                 <Search size={18} />
-                            </Link>
+                            </button>
 
                             <Link
-                                href="/shop"
+                                href="/wishlist"
                                 className="relative hidden rounded-full border border-[var(--color-brand-line)] bg-white/75 p-2.5 text-[var(--color-brand-ink)] transition-colors hover:bg-white md:inline-flex"
                                 aria-label="Wishlist"
                             >
@@ -121,6 +143,54 @@ export const Navbar = () => {
                     </div>
                 </div>
 
+                {searchOpen && (
+                    <div className="mt-3 hidden overflow-hidden rounded-[28px] border border-[var(--color-brand-line)] bg-white/95 p-4 shadow-[var(--shadow-soft)] backdrop-blur-xl md:block">
+                        <div className="relative">
+                            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-brand-muted)]" />
+                            <input
+                                value={searchQuery}
+                                onChange={(event) => setSearchQuery(event.target.value)}
+                                autoFocus
+                                placeholder="Search rompers, dresses, polos..."
+                                className="w-full rounded-2xl border border-[var(--color-brand-line)] bg-[var(--color-brand-cream)]/60 py-3 pl-11 pr-11 text-sm font-semibold text-[var(--color-brand-ink)] outline-none transition-colors focus:border-[var(--color-brand-blue)]"
+                            />
+                            <button
+                                type="button"
+                                onClick={closeSearch}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[var(--color-brand-muted)] hover:bg-white"
+                                aria-label="Close search"
+                            >
+                                <X size={16} />
+                            </button>
+                        </div>
+
+                        <div className="mt-4 grid gap-2">
+                            {searchQuery.trim() && searchResults.length === 0 && (
+                                <p className="rounded-2xl bg-[var(--color-brand-cream)]/60 px-4 py-3 text-sm font-semibold text-[var(--color-brand-muted)]">
+                                    No products found. Try another keyword.
+                                </p>
+                            )}
+
+                            {searchResults.map((product) => (
+                                <Link
+                                    key={product.id}
+                                    href={`/product/${product.id}`}
+                                    onClick={closeSearch}
+                                    className="flex items-center gap-3 rounded-2xl px-3 py-2 transition-colors hover:bg-[var(--color-brand-cream)]"
+                                >
+                                    <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[var(--color-brand-cream)]">
+                                        <Image src={product.imageUrl} alt={product.name} fill sizes="56px" className="object-cover" />
+                                    </span>
+                                    <span className="min-w-0 flex-1">
+                                        <span className="block truncate text-sm font-bold text-[var(--color-brand-ink)]">{product.name}</span>
+                                        <span className="text-xs font-semibold text-[var(--color-brand-muted)]">PKR {product.price.toLocaleString()}</span>
+                                    </span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {mobileMenuOpen && (
                     <div className="mt-3 rounded-[28px] border border-[var(--color-brand-line)] bg-white/92 p-4 shadow-[var(--shadow-soft)] backdrop-blur-xl md:hidden">
                         <div className="mb-4 rounded-[22px] bg-[var(--color-brand-cream)] p-4">
@@ -133,8 +203,42 @@ export const Navbar = () => {
                         </div>
 
                         <nav className="flex flex-col gap-2">
+                            <div className="rounded-2xl bg-[var(--color-brand-cream)] p-3">
+                                <div className="relative">
+                                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-brand-muted)]" />
+                                    <input
+                                        value={searchQuery}
+                                        onChange={(event) => setSearchQuery(event.target.value)}
+                                        placeholder="Search products..."
+                                        className="w-full rounded-xl border border-[var(--color-brand-line)] bg-white py-3 pl-9 pr-3 text-sm font-semibold text-[var(--color-brand-ink)] outline-none focus:border-[var(--color-brand-blue)]"
+                                    />
+                                </div>
+                                {searchQuery.trim() && (
+                                    <div className="mt-3 grid gap-2">
+                                        {searchResults.length > 0 ? (
+                                            searchResults.map((product) => (
+                                                <Link
+                                                    key={product.id}
+                                                    href={`/product/${product.id}`}
+                                                    className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm font-semibold text-[var(--color-brand-ink)]"
+                                                    onClick={() => {
+                                                        setMobileMenuOpen(false);
+                                                        closeSearch();
+                                                    }}
+                                                >
+                                                    <span className="truncate">{product.name}</span>
+                                                    <span className="ml-3 shrink-0 text-xs text-[var(--color-brand-muted)]">PKR {product.price.toLocaleString()}</span>
+                                                </Link>
+                                            ))
+                                        ) : (
+                                            <p className="rounded-xl bg-white px-3 py-2 text-sm font-semibold text-[var(--color-brand-muted)]">No products found</p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
                             <Link
-                                href="/shop"
+                                href="/wishlist"
                                 className="flex items-center justify-between rounded-2xl bg-[var(--color-brand-cream)] px-4 py-3 text-sm font-semibold text-[var(--color-brand-ink)] transition-colors hover:bg-white"
                                 onClick={() => setMobileMenuOpen(false)}
                             >

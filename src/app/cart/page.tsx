@@ -50,8 +50,11 @@ export default function CartPage() {
                         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
                             {/* Cart Items */}
                             <div className="lg:col-span-2 space-y-4">
-                                {cart.map((item) => (
-                                    <div key={item.id} className="bg-white rounded-2xl p-4 md:p-6 shadow-[var(--shadow-soft)] border border-gray-100 flex gap-4 md:gap-6">
+                                {cart.map((item) => {
+                                    const cartKey = item.cartKey ?? item.id;
+
+                                    return (
+                                    <div key={cartKey} className="bg-white rounded-2xl p-4 md:p-6 shadow-[var(--shadow-soft)] border border-gray-100 flex gap-4 md:gap-6">
                                         {/* Image */}
                                         <Link href={`/product/${item.id}`} className="relative w-24 h-28 md:w-32 md:h-36 rounded-xl overflow-hidden flex-shrink-0 bg-gray-50">
                                             <Image src={item.imageUrl} alt={item.name} fill className="object-cover" />
@@ -65,9 +68,12 @@ export default function CartPage() {
                                                         {item.name}
                                                     </Link>
                                                     <p className="text-sm text-gray-400 mt-0.5">{item.category}</p>
+                                                    {item.selectedSize && (
+                                                        <p className="mt-1 text-xs font-bold uppercase tracking-wide text-[var(--color-brand-muted)]">Size: {item.selectedSize}</p>
+                                                    )}
                                                 </div>
                                                 <button
-                                                    onClick={() => removeFromCart(item.id)}
+                                                    onClick={() => removeFromCart(cartKey)}
                                                     className="p-2 text-gray-300 hover:text-red-500 transition-colors"
                                                     aria-label="Remove item"
                                                 >
@@ -79,14 +85,14 @@ export default function CartPage() {
                                                 {/* Quantity Controls */}
                                                 <div className="inline-flex items-center border border-gray-200 rounded-lg overflow-hidden">
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                        onClick={() => updateQuantity(cartKey, item.quantity - 1)}
                                                         className="p-2 hover:bg-gray-50 transition-colors"
                                                     >
                                                         <Minus size={14} />
                                                     </button>
                                                     <span className="px-4 py-2 font-semibold text-sm text-gray-900">{item.quantity}</span>
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                        onClick={() => updateQuantity(cartKey, item.quantity + 1)}
                                                         className="p-2 hover:bg-gray-50 transition-colors"
                                                     >
                                                         <Plus size={14} />
@@ -100,7 +106,7 @@ export default function CartPage() {
                                             </div>
                                         </div>
                                     </div>
-                                ))}
+                                )})}
 
                                 {/* Clear Cart */}
                                 <button

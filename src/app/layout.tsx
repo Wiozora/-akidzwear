@@ -17,8 +17,35 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://wear.vercel.app'),
   title: 'AkidZ Wear | Playful Premium Clothing For Little Originals',
   description: 'Thoughtful clothing for toddlers and kids with soft fabrics, playful colors, and everyday comfort.',
+  keywords: ['kidswear Pakistan', 'toddler clothes', 'kids clothing', 'AkidZ Wear', 'baby clothes'],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'AkidZ Wear | Playful Premium Clothing For Little Originals',
+    description: 'Soft, colorful clothing for toddlers and kids with parent-friendly comfort.',
+    url: '/',
+    siteName: 'AkidZ Wear',
+    images: [
+      {
+        url: '/logo-compact.png',
+        width: 540,
+        height: 364,
+        alt: 'AkidZ Wear logo',
+      },
+    ],
+    locale: 'en_PK',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AkidZ Wear | Playful Premium Clothing For Little Originals',
+    description: 'Soft, colorful clothing for toddlers and kids with parent-friendly comfort.',
+    images: ['/logo-compact.png'],
+  },
 };
 
 export default function RootLayout({

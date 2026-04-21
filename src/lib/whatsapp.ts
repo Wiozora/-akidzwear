@@ -11,7 +11,8 @@ export const formatWhatsAppMessage = (cartItems: CartItem[]): string => {
     cartItems.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
-        message += `${index + 1}. ${item.name} (x${item.quantity}) - PKR ${itemTotal.toLocaleString()}%0A`;
+        const size = item.selectedSize ? ` - Size: ${item.selectedSize}` : '';
+        message += `${index + 1}. ${item.name}${size} (x${item.quantity}) - PKR ${itemTotal.toLocaleString()}%0A`;
     });
 
     message += `%0A*Total Amount:* PKR ${total.toLocaleString()}%0A%0A`;
