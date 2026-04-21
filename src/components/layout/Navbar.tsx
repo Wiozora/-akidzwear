@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { ShoppingBag, Menu, X, Heart, Search, ArrowRight } from 'lucide-react';
@@ -42,13 +43,15 @@ export const Navbar = () => {
 
                 <div className={`mt-3 rounded-[28px] border px-4 py-4 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
                     <div className="flex items-center justify-between gap-4">
-                        <Link href="/" className="flex shrink-0 flex-col">
-                            <span className="display-title text-[2rem] leading-none text-[var(--color-brand-ink)]">
-                                Akid<span className="text-[var(--color-brand-coral)]">Z</span>
-                            </span>
-                            <span className="ml-1 text-[10px] font-bold uppercase tracking-[0.34em] text-[var(--color-brand-muted)]">
-                                Wear
-                            </span>
+                        <Link href="/" className="flex shrink-0 items-center" aria-label="AkidZ Wear home">
+                            <Image
+                                src="/logo.png"
+                                alt="AkidZ Wear"
+                                width={1816}
+                                height={1192}
+                                priority
+                                className="h-14 w-auto object-contain md:h-16"
+                            />
                         </Link>
 
                         <nav className="hidden items-center gap-2 rounded-full border border-[var(--color-brand-line)] bg-[var(--color-brand-cream)]/85 px-3 py-2 md:flex">

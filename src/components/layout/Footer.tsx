@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const Footer = () => {
     const shopLinks = [
@@ -49,13 +50,14 @@ export const Footer = () => {
 
                     <div className="grid gap-10 py-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
                         <div>
-                            <Link href="/" className="inline-block">
-                                <span className="display-title text-4xl leading-none text-[var(--color-brand-ink)]">
-                                    Akid<span className="text-[var(--color-brand-coral)]">Z</span>
-                                </span>
-                                <span className="ml-1 block text-[10px] font-bold uppercase tracking-[0.34em] text-[var(--color-brand-muted)]">
-                                    Wear
-                                </span>
+                            <Link href="/" className="inline-flex items-center" aria-label="AkidZ Wear home">
+                                <Image
+                                    src="/logo.png"
+                                    alt="AkidZ Wear"
+                                    width={1816}
+                                    height={1192}
+                                    className="h-20 w-auto object-contain"
+                                />
                             </Link>
                             <p className="mt-5 max-w-md text-sm leading-7 text-[var(--color-brand-muted)]">
                                 Premium toddler and kidswear designed for movement, softness, and a little extra charm in everyday dressing.
