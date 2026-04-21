@@ -41,16 +41,16 @@ export const Navbar = () => {
                     </span>
                 </div>
 
-                <div className={`mt-3 rounded-[28px] border px-4 py-4 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
+                <div className={`mt-2 overflow-visible rounded-[28px] border px-4 py-1 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
                     <div className="flex items-center justify-between gap-4">
-                        <Link href="/" className="flex shrink-0 items-center" aria-label="AkidZ Wear home">
+                        <Link href="/" className="relative flex h-14 w-44 shrink-0 items-center overflow-visible md:h-16 md:w-48" aria-label="AkidZ Wear home">
                             <Image
                                 src="/logo.png"
                                 alt="AkidZ Wear"
                                 width={1816}
                                 height={1192}
                                 priority
-                                className="h-28 w-auto object-contain md:h-32"
+                                className="absolute left-0 top-1/2 h-28 w-auto -translate-y-1/2 object-contain md:h-32"
                             />
                         </Link>
 
