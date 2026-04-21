@@ -50,7 +50,7 @@ export const Navbar = () => {
                                 width={1816}
                                 height={1192}
                                 priority
-                                className="h-14 w-auto object-contain md:h-16"
+                                className="h-28 w-auto object-contain md:h-32"
                             />
                         </Link>
 

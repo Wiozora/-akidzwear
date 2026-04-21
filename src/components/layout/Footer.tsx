@@ -56,7 +56,7 @@ export const Footer = () => {
                                     alt="AkidZ Wear"
                                     width={1816}
                                     height={1192}
-                                    className="h-20 w-auto object-contain"
+                                    className="h-40 w-auto object-contain"
                                 />
                             </Link>
                             <p className="mt-5 max-w-md text-sm leading-7 text-[var(--color-brand-muted)]">
