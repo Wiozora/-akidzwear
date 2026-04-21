@@ -41,9 +41,9 @@ export const Navbar = () => {
                     </span>
                 </div>
 
-                <div className={`mt-2 overflow-visible rounded-[28px] border px-4 py-1 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
+                <div className={`mt-2 overflow-visible rounded-[28px] border px-4 py-3 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
                     <div className="flex items-center justify-between gap-4">
-                        <Link href="/" className="relative flex h-14 w-44 shrink-0 items-center overflow-visible md:h-16 md:w-48" aria-label="AkidZ Wear home">
+                        <Link href="/" className="relative flex h-20 w-48 shrink-0 items-center overflow-visible md:h-24 md:w-56" aria-label="AkidZ Wear home">
                             <Image
                                 src="/logo.png"
                                 alt="AkidZ Wear"

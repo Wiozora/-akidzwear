@@ -34,12 +34,12 @@ export default function RootLayout({
             <div className="relative isolate flex min-h-screen flex-col overflow-x-clip">
               <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
                 <div className="soft-grid absolute inset-x-0 top-0 h-[32rem] opacity-40" />
-                <div className="absolute left-[-8rem] top-28 h-72 w-72 rounded-full bg-[var(--color-brand-peach)]/35 blur-3xl" />
-                <div className="absolute right-[-6rem] top-40 h-64 w-64 rounded-full bg-[var(--color-brand-blue)]/25 blur-3xl" />
-                <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[var(--color-brand-mint)]/30 blur-3xl" />
+                <div className="absolute left-[-8rem] top-28 h-72 w-72 rounded-full bg-[var(--color-brand-peach)]/32 blur-3xl" />
+                <div className="absolute right-[-6rem] top-40 h-64 w-64 rounded-full bg-[var(--color-brand-blue)]/24 blur-3xl" />
+                <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[var(--color-brand-mint)]/28 blur-3xl" />
               </div>
               <Navbar />
-              <main className="flex-grow pt-28 md:pt-32">
+              <main className="flex-grow pt-32 md:pt-36">
                 {children}
               </main>
               <Footer />
