@@ -43,7 +43,7 @@ export const Navbar = () => {
 
                 <div className={`mt-2 overflow-visible rounded-[28px] border px-4 py-3 transition-all duration-300 md:px-6 ${isScrolled ? 'border-white/70 bg-white/92 shadow-[var(--shadow-soft)] backdrop-blur-xl' : 'border-[var(--color-brand-line)] bg-white/74 shadow-[var(--shadow-card)] backdrop-blur-lg'}`}>
                     <div className="flex items-center justify-between gap-4">
-                        <Link href="/" className="relative flex h-20 w-48 shrink-0 items-center overflow-visible md:h-24 md:w-56" aria-label="AkidZ Wear home">
+                        <Link href="/" className="relative flex h-20 w-40 shrink-0 items-center overflow-visible sm:w-48 md:h-24 md:w-56" aria-label="AkidZ Wear home">
                             <Image
                                 src="/logo.png"
                                 alt="AkidZ Wear"
@@ -77,7 +77,7 @@ export const Navbar = () => {
 
                             <Link
                                 href="/shop"
-                                className="relative inline-flex rounded-full border border-[var(--color-brand-line)] bg-white/75 p-2.5 text-[var(--color-brand-ink)] transition-colors hover:bg-white"
+                                className="relative hidden rounded-full border border-[var(--color-brand-line)] bg-white/75 p-2.5 text-[var(--color-brand-ink)] transition-colors hover:bg-white md:inline-flex"
                                 aria-label="Wishlist"
                             >
                                 <Heart size={18} />
@@ -133,6 +133,21 @@ export const Navbar = () => {
                         </div>
 
                         <nav className="flex flex-col gap-2">
+                            <Link
+                                href="/shop"
+                                className="flex items-center justify-between rounded-2xl bg-[var(--color-brand-cream)] px-4 py-3 text-sm font-semibold text-[var(--color-brand-ink)] transition-colors hover:bg-white"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <span className="inline-flex items-center gap-3">
+                                    <Heart size={18} />
+                                    Wishlist
+                                </span>
+                                {wishlistCount > 0 && (
+                                    <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[var(--color-brand-coral)] px-2 text-xs font-bold text-white">
+                                        {wishlistCount}
+                                    </span>
+                                )}
+                            </Link>
                             {navItems.map((item) => (
                                 <Link
                                     key={item.href}
